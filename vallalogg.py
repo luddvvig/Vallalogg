@@ -1,4 +1,5 @@
 import csv
+import os
 from funktioner import ensure_csv_with_headers, datum_kontroll, validate_temperature
 
 
@@ -33,3 +34,75 @@ def add_to_logg():
     print(f"Post tillagd för {datum} i {plats}")
 
 
+def read_log():
+    if not os.path.exists("vallalogg.csv"):
+        print("Ingen vallalogg hittades. Skapa din första post först!")
+        return
+
+    while True:
+        date_search = input("Vilket datum vill du kolla? (YYYY-MM-DD): ")
+        if datum_kontroll(date_search):
+            break
+        else:
+                print("Ogiltigt datum. Använd formatet YYYY-MM-DD")
+    
+    try:
+        with open("vallalogg.csv", "r") as f:
+            reader = csv.DictReader(f)
+        
+            search_matching = []
+            for row in reader:
+                if row["Datum"] == date_search:
+                    search_matching.append(row)
+        
+        
+        if search_matching:
+            print(f"Vallalogg för {date_search}")
+            print("=" * 50)
+        
+
+            for i, post in enumerate(search_matching, 1):
+                
+                print(f"Post {i}:")
+                print(f"  Plats: {post['Plats']}")
+                print(f"  Temperatur: {post['Temperatur']}°C")
+                print(f"  Snötyp: {post['Snotyp']}")
+                print(f"  Valla: {post['Valla']}")
+                if post['Kommentar']:  # Visa endast om kommentar finns
+                    print(f"  Kommentar: {post['Kommentar']}")
+
+            print(f"\nTotalt hittades {len(search_matching)} post(er) för detta datum.")
+        else:
+            print(f"\nIngen vallalogg hittades för {date_search}.")
+            print("Kontrollera att datumet är korrekt eller lägg till en ny post.")
+
+    except FileNotFoundError:
+        print("Vallalogg-filen kunde inte hittas.")
+    except PermissionError:
+        print("Kan inte läsa vallalogg-filen. Kontrollera att den inte är öppen i ett annat program.")
+    except csv.Error as e:
+        # Detta händer om CSV-filen är korrupt eller har fel format
+        print(f"Fel vid läsning av CSV-filen: {e}")
+    except Exception as e:
+        # Fångar upp alla andra oväntade fel
+        print(f"Ett oväntat fel uppstod: {e}")
+
+def show_all_logs():
+    if not os.path.exists("vallalogg.csv"):
+        print("Ingen vallalogg hittades. Skapa din första post först!")
+        return
+
+    with open("vallalogg.csv", "r") as f:
+        reader = csv.DictReader(f)  
+        
+        all_posts = list(reader)
+        all_posts.sort(key=lambda x: x["Datum"], reverse=True)
+
+        print(f"\n=== Alla vallalogg-poster ({len(all_posts)} st) ===")
+        print("=" * 60)
+
+        for i, post in enumerate(all_posts, 1):
+                print(f"\n{i}. {post['Datum']} - {post['Plats']}")
+                print(f"   Temperatur: {post['Temperatur']}°C | Snötyp: {post['Snotyp']} | Valla: {post['Valla']}")
+                if post['Kommentar']:
+                    print(f"   Kommentar: {post['Kommentar']}")

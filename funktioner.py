@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 def ensure_csv_with_headers(filename):
     if not os.path.exists(filename):
@@ -35,3 +36,8 @@ def validate_temperature(temperatur_text):
     except ValueError:
         # Om konverteringen misslyckas, returnera None
         return None
+    
+def exit_program():
+    print("Program is being shut down")
+    sys.exit()
+

@@ -11,18 +11,18 @@
 - [x] Testa att data sparas korrekt i CSV-format
 
 ### Läsa och visa data
-- [ ] Skapa funktion för att läsa alla poster från CSV-filen
-- [ ] Implementera funktion för att visa alla poster i terminalen på ett snyggt sätt
-- [ ] Lägg till möjlighet att visa poster filtrerade efter datum
+- [x] Skapa funktion för att läsa alla poster från CSV-filen
+- [x] Implementera funktion för att visa alla poster i terminalen på ett snyggt sätt
+- [x] Lägg till möjlighet att visa poster filtrerade efter datum
 - [ ] Lägg till möjlighet att visa poster filtrerade efter plats
 - [ ] Lägg till möjlighet att visa poster filtrerade efter temperaturintervall
-- [ ] Hantera fel när CSV-filen inte existerar eller är tom
+- [x] Hantera fel när CSV-filen inte existerar eller är tom
 
 ### Användargränssnitt och navigation
-- [ ] Skapa huvudmeny med alternativ (lägg till post, visa poster, avsluta)
-- [ ] Implementera menynavigation med input-validering
+- [x] Skapa huvudmeny med alternativ (lägg till post, visa poster, avsluta)
+- [x] Implementera menynavigation med input-validering
 - [ ] Lägg till möjlighet att gå tillbaka från undermenyer
-- [ ] Implementera "avsluta"-funktionalitet
+- [x] Implementera "avsluta"-funktionalitet
 - [ ] Lägg till bekräftelsemeddelanden efter genomförda åtgärder
 
 ### Felhantering och robusthet
