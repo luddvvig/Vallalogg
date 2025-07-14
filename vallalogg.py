@@ -1,6 +1,7 @@
 import csv
 from funktioner import ensure_csv_with_headers, datum_kontroll, validate_temperature
 
+
 def add_to_logg():
     #Kollar så att det finns en csv-fil
     ensure_csv_with_headers("vallalogg.csv")
@@ -30,4 +31,5 @@ def add_to_logg():
         writer.writerow([datum, plats, temperatur, snotyp, valla, kommentar])
 
     print(f"Post tillagd för {datum} i {plats}")
+
 

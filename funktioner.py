@@ -28,19 +28,7 @@ def datum_kontroll(datum):
         return True
 
 def validate_temperature(temperatur_text):
-    """
-    Validerar och konverterar temperaturinmatning till float.
-    
-    Denna funktion försöker konvertera texten till ett decimaltal.
-    Om det lyckas, returnerar den talet. Om det misslyckas (t.ex. om
-    användaren skrev "kall" istället för "-5"), returnerar den None.
-    
-    Args:
-        temperatur_text (str): Temperaturtext som ska konverteras
-    
-    Returns:
-        float or None: Temperatur som decimaltal, eller None om ogiltig
-    """
+
     try:
         # Försök konvertera texten till ett decimaltal
         return float(temperatur_text)
