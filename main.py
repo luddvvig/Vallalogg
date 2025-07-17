@@ -1,15 +1,16 @@
-from vallalogg import add_to_logg, show_all_logs, read_log
+from vallalogg import add_to_logg, show_all_logs, log_search
 from funktioner import exit_program
 
 def main():
 
     print("Välkommen till Vallaloggen!")
     print("=" * 30)
-    
+
+    #Skapar en meny att välja från
     while True:
         print("=" * 30)
         print("\nFör att välja funktion, skriv in rätt nummer!")
-        print("Vallalogg sök datum (1)")
+        print("Vallalogg sök (1)")
         print("Alla vallaloggar (2)")
         print("Lägg till en ny post (3)")
         print("Avsluta (4)")
@@ -17,7 +18,7 @@ def main():
         choice_menu = input("Välj nummer här: ").strip()
 
         if choice_menu == "1":
-            read_log()
+            log_search()
         elif choice_menu == "2":
             show_all_logs()
         elif choice_menu == "3":
@@ -30,6 +31,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # Denna rad säkerställer att main() endast körs när filen körs direkt
-    # och inte när den importeras som en modul
     main()

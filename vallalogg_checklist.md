@@ -14,7 +14,7 @@
 - [x] Skapa funktion för att läsa alla poster från CSV-filen
 - [x] Implementera funktion för att visa alla poster i terminalen på ett snyggt sätt
 - [x] Lägg till möjlighet att visa poster filtrerade efter datum
-- [ ] Lägg till möjlighet att visa poster filtrerade efter plats
+- [x] Lägg till möjlighet att visa poster filtrerade efter plats
 - [ ] Lägg till möjlighet att visa poster filtrerade efter temperaturintervall
 - [x] Hantera fel när CSV-filen inte existerar eller är tom
 
