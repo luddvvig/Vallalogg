@@ -5,19 +5,23 @@ from funktioner import ensure_csv_with_headers, datum_kontroll, validate_tempera
 vallalogg = "vallalogg.csv"
 
 def log_search():
-    print("För att söka på datum (1)")
-    print("För att söka på plats (2)")
-    print("För att söka temperatur (3)")
-    print("För att gå tillbaka till meny (4)")
-    choice = input("Välj sökmetod här: ")
-    if choice == "1":
-        log_search_date()
-    elif choice == "2":
-        log_search_place()
-    elif choice == "3":
-        log_search_temp()
-    else:
-        print("Välj från menyn!")
+    while True:
+        print("=" * 50)
+        print("\nFör att söka på datum (1)")
+        print("För att söka på plats (2)")
+        print("För att söka temperatur (3)")
+        print("För att gå tillbaka till meny (M/m)")
+        choice = input("Välj sökmetod här: ").strip().lower()
+        if choice == "1":
+            log_search_date()
+        elif choice == "2":
+            log_search_place()
+        elif choice == "3":
+            log_search_temp()
+        elif choice == "m":
+            break
+        else:
+            print("Välj från menyn!")
 
 def log_search_temp():
     print("*" * 30)
@@ -89,12 +93,26 @@ def add_to_logg():
     valla = input("Valla: ").lower()
     kommentar = input("Kommentar: ")
 
-    with open(vallalogg, "a", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow([datum, plats, temperatur, snotyp, valla, kommentar])
+    print("\n" + "="*40)
+    print("SAMMANFATTNING:")
+    print(f"Datum: {datum}")
+    print(f"Plats: {plats}")
+    print(f"Temperatur: {temperatur}°C")
+    print(f"Snötyp: {snotyp}")
+    print(f"Valla: {valla}")
+    print(f"Kommentar: {kommentar}")
+    print("="*40)
 
-    print(f"Post tillagd för {datum} i {plats}")
+    confirm = input("Spara denna post? J/N: ").strip().lower()
+    
+    if confirm == "j":
+        with open(vallalogg, "a", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow([datum, plats, temperatur, snotyp, valla, kommentar])
 
+            print(f"Post tillagd för {datum} i {plats}")
+    else:
+        print("Post inte sparad!")
 
 def log_search_date():
     print("*" * 30)
@@ -135,6 +153,7 @@ def log_search_date():
                     print(f"  Kommentar: {post['Kommentar']}")
 
             print(f"\nTotalt hittades {len(search_matching)} post(er) för detta datum.")
+            print("=" * 50)
         else:
             print(f"\nIngen vallalogg hittades för {date_search}.")
             print("Kontrollera att datumet är korrekt eller lägg till en ny post.")
@@ -149,6 +168,8 @@ def log_search_date():
     except Exception as e:
         # Fångar upp alla andra oväntade fel
         print(f"Ett oväntat fel uppstod: {e}")
+    input("\nTryck Enter för att fortsätta...\n")
+    print("=" * 50)
 
 def log_search_place():
     if not os.path.exists(vallalogg):

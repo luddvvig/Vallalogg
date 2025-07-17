@@ -43,4 +43,6 @@ def validate_temperature(temperatur_text):
 def exit_program():
     print("Program is being shut down")
     sys.exit()
-    
+
+"""def go_back():
+    choice = input("Tryck på Q/q för att gå tillbaka").strip.lower"""
