@@ -15,12 +15,12 @@
 - [x] Implementera funktion för att visa alla poster i terminalen på ett snyggt sätt
 - [x] Lägg till möjlighet att visa poster filtrerade efter datum
 - [x] Lägg till möjlighet att visa poster filtrerade efter plats
-- [ ] Lägg till möjlighet att visa poster filtrerade efter temperaturintervall
+- [x] Lägg till möjlighet att visa poster filtrerade efter temperaturintervall
 - [x] Hantera fel när CSV-filen inte existerar eller är tom
 
 ### Användargränssnitt och navigation
 - [x] Skapa huvudmeny med alternativ (lägg till post, visa poster, avsluta)
-- [x] Implementera menynavigation med input-validering
+- [ ] Implementera menynavigation med input-validering
 - [ ] Lägg till möjlighet att gå tillbaka från undermenyer
 - [x] Implementera "avsluta"-funktionalitet
 - [ ] Lägg till bekräftelsemeddelanden efter genomförda åtgärder

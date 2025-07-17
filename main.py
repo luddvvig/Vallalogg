@@ -9,7 +9,7 @@ def main():
     #Skapar en meny att välja från
     while True:
         print("=" * 30)
-        print("\nFör att välja funktion, skriv in rätt nummer!")
+        print("\nFör att välja funktion, skriv in rätt nummer!\n")
         print("Vallalogg sök (1)")
         print("Alla vallaloggar (2)")
         print("Lägg till en ny post (3)")
