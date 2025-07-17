@@ -20,17 +20,17 @@
 
 ### Användargränssnitt och navigation
 - [x] Skapa huvudmeny med alternativ (lägg till post, visa poster, avsluta)
-- [ ] Implementera menynavigation med input-validering
+- [x] Implementera menynavigation med input-validering
 - [ ] Lägg till möjlighet att gå tillbaka från undermenyer
 - [x] Implementera "avsluta"-funktionalitet
 - [ ] Lägg till bekräftelsemeddelanden efter genomförda åtgärder
 
 ### Felhantering och robusthet
-- [ ] Hantera FileNotFoundError när CSV-filen inte finns
-- [ ] Hantera PermissionError om filen inte kan skrivas/läsas
+- [x] Hantera FileNotFoundError när CSV-filen inte finns
+- [x] Hantera PermissionError om filen inte kan skrivas/läsas
 - [ ] Implementera graceful shutdown vid KeyboardInterrupt (Ctrl+C)
-- [ ] Lägg till informativa felmeddelanden för användaren
-- [ ] Testa programmet med ogiltig input och säkerställ att det inte kraschar
+- [x] Lägg till informativa felmeddelanden för användaren
+- [x] Testa programmet med ogiltig input och säkerställ att det inte kraschar
 
 ## 📋 Steg 2 - Enkel valla-väljare
 

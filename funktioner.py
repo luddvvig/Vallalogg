@@ -43,4 +43,4 @@ def validate_temperature(temperatur_text):
 def exit_program():
     print("Program is being shut down")
     sys.exit()
-
+    
