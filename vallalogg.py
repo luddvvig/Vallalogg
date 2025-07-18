@@ -66,7 +66,6 @@ def log_search_temp():
         if search_matching:
             _print_search_results(search_matching, temp_range)
     print(temp_range)
-log_search_temp()
 
 def add_to_logg():
     #Kollar så att det finns en csv-fil
@@ -185,12 +184,4 @@ def show_all_logs():
         
         all_posts = list(reader)
         all_posts.sort(key=lambda x: x["Datum"], reverse=True)
-
-        print(f"\n=== Alla vallalogg-poster ({len(all_posts)} st) ===")
-        print("=" * 60)
-
-        for i, post in enumerate(all_posts, 1):
-                print(f"\n{i}. {post['Datum']} - {post['Plats']}")
-                print(f"   Temperatur: {post['Temperatur']}°C | Snötyp: {post['Snotyp']} | Valla: {post['Valla']}")
-                if post['Kommentar']:
-                    print(f"   Kommentar: {post['Kommentar']}")
+    _print_search_results(all_posts, search_term="Alla loggar")
