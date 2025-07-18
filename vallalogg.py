@@ -4,6 +4,24 @@ from funktioner import ensure_csv_with_headers, datum_kontroll, validate_tempera
 
 vallalogg = "vallalogg.csv"
 
+def _print_search_results(results, search_term):
+    if not results:
+        print(f"Inga resultat hittades för {search_term}.")
+        print("Kontrollera att datumet är korrekt eller lägg till en ny post.")
+        return
+
+    print(f"\nTotalt hittades {len(results)} post(er) för {search_term}.")
+        
+    for i, post in enumerate(results, 1):
+        print(f"{i}. {post['Datum']} - {post['Plats']}")
+        print(f"   Temp: {post['Temperatur']}°C | Snö: {post['Snotyp']} | Valla: {post['Valla']}")
+        if post['Kommentar']:
+            print(f"   Kommentar: {post['Kommentar']}")
+    print("=" * 60)
+
+
+
+
 def log_search():
     while True:
         print("=" * 50)
@@ -41,33 +59,14 @@ def log_search_temp():
 
     print(f"\nSöker efter loggar mellan {temp_search_low}°C och {temp_search_high}°C...\n")
     print("=" * 30)
-
-    search_matching = []
-
-
+    temp_range = str(temp_search_low) + "->" + str(temp_search_high)
     with open(vallalogg, "r", newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
-
-        
-        for row in reader:
-            try:
-                temp = float(row["Temperatur"])
-                if temp_search_low <= temp <= temp_search_high:
-                    search_matching.append(row)
-            except ValueError:
-                continue
-    if not search_matching:
-        print("Inga loggar hittades i detta temp-spann")
-    else:
-        print(f"Hittade {len(search_matching)} vallaloggar\n")
-        for i, post in enumerate(search_matching, 1):    
-            print(f"Post {i}:")
-            print(f"  Plats: {post['Plats']}")
-            print(f"  Temperatur: {post['Temperatur']}°C")
-            print(f"  Snötyp: {post['Snotyp']}")
-            print(f"  Valla: {post['Valla']}")
-            if post['Kommentar']:
-                print(f"  Kommentar: {post['Kommentar']}")
+        search_matching = [row for row in reader if temp_search_low <= float(row["Temperatur"]) <= temp_search_high]
+        if search_matching:
+            _print_search_results(search_matching, temp_range)
+    print(temp_range)
+log_search_temp()
 
 def add_to_logg():
     #Kollar så att det finns en csv-fil
@@ -131,32 +130,8 @@ def log_search_date():
         with open(vallalogg, "r") as f:
             reader = csv.DictReader(f)
         
-            search_matching = []
-            for row in reader:
-                if row["Datum"] == date_search:
-                    search_matching.append(row)
-        
-        
-        if search_matching:
-            print(f"Vallalogg för {date_search}")
-            print("=" * 50)
-        
-
-            for i, post in enumerate(search_matching, 1):
-                
-                print(f"Post {i}:")
-                print(f"  Plats: {post['Plats']}")
-                print(f"  Temperatur: {post['Temperatur']}°C")
-                print(f"  Snötyp: {post['Snotyp']}")
-                print(f"  Valla: {post['Valla']}")
-                if post['Kommentar']:
-                    print(f"  Kommentar: {post['Kommentar']}")
-
-            print(f"\nTotalt hittades {len(search_matching)} post(er) för detta datum.")
-            print("=" * 50)
-        else:
-            print(f"\nIngen vallalogg hittades för {date_search}.")
-            print("Kontrollera att datumet är korrekt eller lägg till en ny post.")
+            search_matching = [row for row in reader if row["Datum"] == date_search]
+            _print_search_results(search_matching,date_search)
 
     except FileNotFoundError:
         print("Vallalogg-filen kunde inte hittas.")
@@ -177,46 +152,17 @@ def log_search_place():
         return
     
     while True:
-        try:
-            place_search = input("Vilken plats vill du kolla? : ").lower()
-            if place_search != type(str):
-                break
-        except ValueError:
-                print("Hittar inte, testa igen! (Kontrollera stavning)")
-    
-    
-    
+        place_search = input("Vilken plats vill du kolla? : ").lower()
+        if place_search != type(str):
+            break
+
     try:
         with open(vallalogg, "r") as f:
             reader = csv.DictReader(f)
-            
-            search_matching = []
-            for row in reader:
-                if row["Plats"] == place_search:
-                    search_matching.append(row)
-                else:
-                    print("Ingen plats matchar, testa igen! (kontrollera din stavning)")
         
-        
-        if search_matching:
-            print(f"Vallalogg för {place_search}")
-            print("=" * 50)
-        
-
-            for i, post in enumerate(search_matching, 1):
-                
-                print(f"Post {i}:")
-                print(f"  Plats: {post['Plats']}")
-                print(f"  Temperatur: {post['Temperatur']}°C")
-                print(f"  Snötyp: {post['Snotyp']}")
-                print(f"  Valla: {post['Valla']}")
-                if post['Kommentar']:
-                    print(f"  Kommentar: {post['Kommentar']}")
-
-            print(f"\nTotalt hittades {len(search_matching)} post(er) för detta datum.")
-        else:
-            print(f"\nIngen vallalogg hittades för {place_search}.")
-            print("Kontrollera att platsen är korrekt eller lägg till en ny post.")
+            search_matching = [row for row in reader if row["Plats"].lower() == place_search]
+            if search_matching:
+                _print_search_results(search_matching, place_search)        
 
     except FileNotFoundError:
         print("Vallalogg-filen kunde inte hittas.")

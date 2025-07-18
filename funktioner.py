@@ -1,6 +1,7 @@
 import csv
 import os
 import sys
+from datetime import datetime
 
 #För att kolla så att en csv-fil finns
 def ensure_csv_with_headers(filename):
@@ -15,21 +16,13 @@ def ensure_csv_with_headers(filename):
 
 #Kontrollerar att datumsträngen är YYYY-MM-DD
 def datum_kontroll(datum):
-    if len(datum) != 10:
-        return False
-    
-    if datum[4] != "-" or datum[7] != "-":
-        return False
-
-    year = datum[0:4]
-    month = datum[5:7]
-    day = datum[8:10]
-
-    if not (year.isdigit() and month.isdigit() and day.isdigit()):
-        return False
-    
-    else:
+    """Kontrollerar att datumsträngen är i formatet YYYY-MM-DD."""
+    try:
+        datetime.strptime(datum, "%Y-%m-%d")
         return True
+    except ValueError:
+        # Om formatet är fel kastas ett ValueError
+        return False
 
 def validate_temperature(temperatur_text):
 
@@ -44,5 +37,3 @@ def exit_program():
     print("Program is being shut down")
     sys.exit()
 
-"""def go_back():
-    choice = input("Tryck på Q/q för att gå tillbaka").strip.lower"""
