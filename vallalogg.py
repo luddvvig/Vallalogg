@@ -5,13 +5,18 @@ from funktioner import ensure_csv_with_headers, datum_kontroll, validate_tempera
 vallalogg = "vallalogg.csv"
 
 def _print_search_results(results, search_term):
+    """Funktion som skriver ut sökresultaten i ett snyggt format
+    Args:
+        results (list) lista med sökresultat
+        search_term: Input för sökningen"""
+    #kontroll om det finns resultat
     if not results:
         print(f"Inga resultat hittades för {search_term}.")
         print("Kontrollera att datumet är korrekt eller lägg till en ny post.")
         return
-
+    # Visar antal resultat
     print(f"\nTotalt hittades {len(results)} post(er) för {search_term}.")
-        
+    #loop för utskrift
     for i, post in enumerate(results, 1):
         print(f"{i}. {post['Datum']} - {post['Plats']}")
         print(f"   Temp: {post['Temperatur']}°C | Snö: {post['Snotyp']} | Valla: {post['Valla']}")
@@ -23,6 +28,10 @@ def _print_search_results(results, search_term):
 
 
 def log_search():
+    """
+    Menyfunktion för att välja söksätt
+    """
+    #Loop för att hålla igpng menyn
     while True:
         print("=" * 50)
         print("\nFör att söka på datum (1)")
@@ -37,11 +46,14 @@ def log_search():
         elif choice == "3":
             log_search_temp()
         elif choice == "m":
-            break
+            break # går tillbaka till huvudmeny
         else:
             print("Välj från menyn!")
 
 def log_search_temp():
+    """
+    Funktion för att söka vallarapport efter ett temperaturspann.
+    """
     print("*" * 30)
     if not os.path.exists(vallalogg):
         print("Ingen vallalogg hittades. Skapa din första post först!")
@@ -50,8 +62,10 @@ def log_search_temp():
     print("Skriv först in lägsta tempdu vill söka på, sedan upp till vilken temp.")
     while True:
         try:
+            #Tar in lägsta och högsta värde i temp-spannet
             temp_search_low = float(input("Välj lägsta temp du vill söka inom (+/-X): "))
             temp_search_high = float(input("Välj högsta temp du vill söka inom (+/-X): "))
+            #extra kontroll så att värderna är float
             if isinstance(temp_search_low, float) and isinstance(temp_search_high, float):
                 break
         except ValueError:
@@ -62,6 +76,7 @@ def log_search_temp():
     temp_range = str(temp_search_low) + "->" + str(temp_search_high)
     with open(vallalogg, "r", newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
+        #Här söker jag i spannet, och lägger till resultatet i en lista
         search_matching = [row for row in reader if temp_search_low <= float(row["Temperatur"]) <= temp_search_high]
         if search_matching:
             _print_search_results(search_matching, temp_range)
