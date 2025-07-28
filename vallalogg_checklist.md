@@ -21,14 +21,14 @@
 ### Användargränssnitt och navigation
 - [x] Skapa huvudmeny med alternativ (lägg till post, visa poster, avsluta)
 - [x] Implementera menynavigation med input-validering
-- [ ] Lägg till möjlighet att gå tillbaka från undermenyer
+- [x] Lägg till möjlighet att gå tillbaka från undermenyer
 - [x] Implementera "avsluta"-funktionalitet
-- [ ] Lägg till bekräftelsemeddelanden efter genomförda åtgärder
+- [x] Lägg till bekräftelsemeddelanden efter genomförda åtgärder
 
 ### Felhantering och robusthet
 - [x] Hantera FileNotFoundError när CSV-filen inte finns
 - [x] Hantera PermissionError om filen inte kan skrivas/läsas
-- [ ] Implementera graceful shutdown vid KeyboardInterrupt (Ctrl+C)
+- [x] Implementera graceful shutdown vid KeyboardInterrupt (Ctrl+C)
 - [x] Lägg till informativa felmeddelanden för användaren
 - [x] Testa programmet med ogiltig input och säkerställ att det inte kraschar
 

@@ -1,11 +1,2 @@
-Datum,Plats,Temperatur,Snotyp,Valla,Kommentar
-2025-17-25,ulricehamn,23.0,ingen,ingen,test2
-2025-07-11,ulricehamn,12.0,gras,ingen,test1
-2025-07-12,boras,65.0,sand,ingen,test
-2025-07-13,tranemo,45.0,grus,ingen,test
-2025-07-14,dalum,32.0,jord,ingen,test
-2025-07-15,skovde,74.0,lera,ingen,test4
-2025-11-11,ulricehamn,67.0,ingeni,test,test6
-2025-12-12,hemma,7.0,ingen,test,test7
-2025-07-19,boden,85.0,granbarr,koda,Test
-2025-07-17,falk�ping,25.0,vatten,vattenskidor,"""test"""
+Datum,Plats,Temperatur,Snotyp,Valla,Struktur,Kommentar
+2025-10-10,ulricehamn,65.0,grus,nero,grön,test

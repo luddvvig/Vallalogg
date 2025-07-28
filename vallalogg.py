@@ -19,7 +19,7 @@ def _print_search_results(results, search_term):
     #loop för utskrift
     for i, post in enumerate(results, 1):
         print(f"{i}. {post['Datum']} - {post['Plats']}")
-        print(f"   Temp: {post['Temperatur']}°C | Snö: {post['Snotyp']} | Valla: {post['Valla']}")
+        print(f"   Temp: {post['Temperatur']}°C | Snö: {post['Snotyp']} | Valla: {post['Valla']}  | Struktur: {post['Struktur']}")
         if post['Kommentar']:
             print(f"   Kommentar: {post['Kommentar']}")
     print("=" * 60)
@@ -104,6 +104,7 @@ def add_to_logg():
             print("Ogiltig temperatur. Ange ett nummer (t.ex. -5 eller 2.5)")
     snotyp = input("Snötyp: ").lower()
     valla = input("Valla: ").lower()
+    structure = input("Struktur: ")
     kommentar = input("Kommentar: ")
 
     print("\n" + "="*40)
@@ -113,15 +114,16 @@ def add_to_logg():
     print(f"Temperatur: {temperatur}°C")
     print(f"Snötyp: {snotyp}")
     print(f"Valla: {valla}")
+    print(f"Struktur: {structure}")
     print(f"Kommentar: {kommentar}")
     print("="*40)
 
     confirm = input("Spara denna post? J/N: ").strip().lower()
     
     if confirm == "j":
-        with open(vallalogg, "a", newline="") as f:
+        with open(vallalogg, "a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow([datum, plats, temperatur, snotyp, valla, kommentar])
+            writer.writerow([datum, plats, temperatur, snotyp, valla, structure, kommentar])
 
             print(f"Post tillagd för {datum} i {plats}")
     else:
@@ -141,7 +143,7 @@ def log_search_date():
                 print("Ogiltigt datum. Använd formatet YYYY-MM-DD")
     
     try:
-        with open(vallalogg, "r") as f:
+        with open(vallalogg, "r",newline="", encoding=("utf-8")) as f:
             reader = csv.DictReader(f)
         
             search_matching = [row for row in reader if row["Datum"] == date_search]
@@ -171,7 +173,7 @@ def log_search_place():
             break
 
     try:
-        with open(vallalogg, "r") as f:
+        with open(vallalogg, "r", encoding=("utf-8")) as f:
             reader = csv.DictReader(f)
         
             search_matching = [row for row in reader if row["Plats"].lower() == place_search]
@@ -194,7 +196,7 @@ def show_all_logs():
         print("Ingen vallalogg hittades. Skapa din första post först!")
         return
 
-    with open(vallalogg, "r") as f:
+    with open(vallalogg, "r", encoding=("utf-8")) as f:
         reader = csv.DictReader(f)  
         
         all_posts = list(reader)
